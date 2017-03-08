@@ -43,7 +43,7 @@ The application starts up at port `8080`.
 
 ### Accessing Swagger 
 On your browser, navigate to `http://localhost:8080/` to view the Swagger. 
-![](./img/book-swagger.png){:height="300px" width="1000px"}.
+![](./img/book-swagger.png)
 
 Click the `Show/Hide` link to view all the operations exposed by Book API.
 * To create a new Book entry, click `POST`. Once expanded 
