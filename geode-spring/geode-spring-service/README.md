@@ -1,7 +1,12 @@
 Apache Geode Spring Service Example
 =========================================
 This is a [**Spring Cloud**](http://projects.spring.io/spring-cloud/) based microservices example backed by
-[**Apache Geode**](http://geode.apache.org/) data management platform, Spring Boot, and Spring Data.
+[**Apache Geode**](http://geode.apache.org/) data management platform, Spring Boot, and Spring Data. The data stored in
+Geode is serialized using [PDX serializer] (https://cwiki.apache.org/confluence/display/GEODE/PDX+Serialization+Internals).
+According to Geode documentation:
+"PDX serialization is the preferred serialization format for storing objects in Geode. PDX serialization is designed 
+to serialize data as compactly as possible, while still providing the capability to read individual fields in a 
+serialized object for query processing."
 
 ### Create a Geode Region
 A Geode region is analogous to a database table. It is used for storing and organizing your data in the cluster.
@@ -46,4 +51,52 @@ On your browser, navigate to `http://localhost:8080/` to view the Swagger.
 ![](./img/book-swagger.png)
 
 Click the `Show/Hide` link to view all the operations exposed by Book API.
-* To create a new Book entry, click `POST`. Once expanded 
+
+#### POST Example
+Once expanded, create a new Book entry by clicking `POST` and entering the following JSON snippet in the `request` field and click `Try it out!`. 
+![](./img/book-post-req.png)
+
+Here is the response you get back. Please notice the book title and the author gets captitalized before insertion.
+![](./img/book-post-rsp.png)
+
+#### GET Example
+To view all books, click `GET` and click lick `Try it out!`. Here is the response you get back:
+![](./img/book-get-rsp.png)
+
+### Viewing Data in Geode Shell
+Since the data is serialized using PDX serialization, you will get the following error when you execute `query`
+command:
+```
+gfsh>query --query='SELECT * FROM /Book'
+
+Result     : false
+startCount : 0
+endCount   : 20
+Message    : Could not create an instance of a class com.basaki.example.geode.spring.model.Book
+
+NEXT_STEP_NAME : END
+```
+In order to view PDX serialized data, export the `gfsh-cache.xml` file under the `resources` folder before starting  
+`gfsh`
+```
+export JAVA_ARGS="-Dgeode.cache-xml-file=gfsh-cache.xml"
+```
+Now you can start the `gfsh`, the `locator`, and the `server`. 
+```
+gfsh>deploy --jar=/tmp/geode-spring-model-1.0.jar
+Member |        Deployed JAR        | Deployed JAR Location
+------ | -------------------------- | ------------------------------------------
+server | geode-spring-model-1.0.jar | /Users/indra.basak/Software/apache-geode..
+```
+
+Query the data again:
+```
+gfsh>query --query='SELECT * FROM /Book'
+
+Result     : false
+startCount : 0
+endCount   : 20
+Message    : Unknown pdx type=14457433
+
+NEXT_STEP_NAME : END
+```
