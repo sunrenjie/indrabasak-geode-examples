@@ -98,5 +98,5 @@ Execute the following command from the parent directory:
 mvn clean install
 ```
 
-[travis-badge]: https://travis-ci.org/indrabasak/spring-cloud-example.svg?branch=master
-[travis-badge-url]: https://travis-ci.org/indrabasak/spring-cloud-example/
+[travis-badge]: https://travis-ci.org/indrabasak/geode-examples.svg?branch=master
+[travis-badge-url]: https://travis-ci.org/indrabasak/geode-examples
