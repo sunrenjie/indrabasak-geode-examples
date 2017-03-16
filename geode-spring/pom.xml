@@ -13,8 +13,8 @@
     <version>1.0</version>
     <name>Geode Spring Boot Example</name>
 
-<modules>
-		<module>geode-spring-model</module>
+    <modules>
+        <module>geode-spring-model</module>
         <module>geode-spring-service</module>
-	</modules>
+    </modules>
 </project>
