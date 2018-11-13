@@ -1,6 +1,8 @@
 package com.basaki.example.geode.spring.repository;
 
 import com.basaki.example.geode.spring.model.Book;
+
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.gemfire.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -14,7 +16,7 @@ import org.springframework.data.repository.CrudRepository;
  * @since 2/22/17
  */
 public interface BookRepository extends CrudRepository<Book, UUID> {
-    Book findById(UUID id);
+    Optional<Book> findById(UUID id);
 
     @Query("SELECT * FROM /Book b WHERE b.title = $1 ")
     Iterable<Book> findByTitle(String title);

@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,12 @@ public class BookController {
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public Book getById(@PathVariable("id") UUID id) {
-        return service.getById(id);
+        Optional<Book> b = service.getById(id);
+        if (b.isPresent()) {
+            return b.get();
+        } else {
+            return null;
+        }
     }
 
     @ApiOperation(

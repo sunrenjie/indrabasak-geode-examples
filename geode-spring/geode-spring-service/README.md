@@ -1,5 +1,8 @@
 Apache Geode Spring Service Example
 =========================================
+
+Note: for updated instruction for running the example, see /runit.gfsh.
+
 This is a [**Spring Cloud**](http://projects.spring.io/spring-cloud/) based microservices example backed by
 [**Apache Geode**](http://geode.apache.org/) data management platform, Spring Boot, and Spring Data. The data stored in
 Geode is serialized using [PDX serializer] (https://cwiki.apache.org/confluence/display/GEODE/PDX+Serialization+Internals).

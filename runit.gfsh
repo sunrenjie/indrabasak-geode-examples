@@ -1,0 +1,9 @@
+# It is assumed that the project is at /home/r/git/java-demos/geode/geode-examples/; change it if necessary.
+# Run with this script under shell:
+# gfsh run --file=/home/r/git/java-demos/geode/geode-examples/runit.gfsh
+
+start locator --name=locator1
+start server --name=server1 --cache-xml-file=/home/r/git/java-demos/geode/geode-examples/geode-spring/geode-spring-service/src/main/resources/gfsh-cache.xml
+create region --name=Book --type=REPLICATE
+deploy --jar=/home/r/git/java-demos/geode/geode-examples/geode-spring/geode-spring-model/target/geode-spring-model-1.0.jar
+query --query='SELECT * FROM /Book'

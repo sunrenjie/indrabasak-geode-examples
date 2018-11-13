@@ -5,6 +5,7 @@ import com.basaki.example.geode.spring.model.BookRequest;
 import com.basaki.example.geode.spring.repository.BookRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class BookService {
         return repo.save(book);
     }
 
-    public Book getById(UUID id) {
+    public Optional<Book> getById(UUID id) {
         return repo.findById(id);
     }
 
@@ -58,7 +59,7 @@ public class BookService {
     }
 
     public void delete(UUID id) {
-        repo.delete(id);
+        repo.deleteById(id);
     }
 
     public void deleteAll() {
